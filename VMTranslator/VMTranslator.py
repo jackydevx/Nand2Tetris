@@ -2,12 +2,19 @@ import json, sys, os
 
 filepath=sys.argv[1]
 
+#def init():
+
+
+
 def translate(line, line_number):
     split_line=line.split()
 
     if len(split_line)==1:
         return lang[line].format(line_number=line_number)
-    else:
+    elif len(split_line)==2:
+        cmd, label=split_line
+        return lang[cmd].format(label=label)
+    elif len(split_line)==3:
         operation,segment,i=split_line
         this_or_that=""
         if segment=="pointer":
