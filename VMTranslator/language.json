@@ -28,6 +28,6 @@
         "static":"//pop static {i}\n@0\nM=M-1\n@0\nA=M\nD=M\n@{filename}.{i}\nM=D"
     },
     "label":"//label {label}\n({label})",
-    "goto":"//goto {label}\n@{label}\n0:JMP",
+    "goto":"//goto {label}\n@{label}\n0;JMP",
     "if-goto":"//if-goto {label}\n@0\nAM=M-1\nD=M\n@{label}\nD;JNE"
 }
