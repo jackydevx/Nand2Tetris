@@ -3,7 +3,6 @@ import json, sys, os
 filepath=sys.argv[1]
 
 def translate(line, line_number):
-    global lang, filepath
     split_line=line.split()
 
     if len(split_line)==1:
