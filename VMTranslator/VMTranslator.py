@@ -1,10 +1,7 @@
 import json, sys, os
 
 filepath=sys.argv[1]
-
-#def init():
-
-
+filename=os.path.basename(filepath)
 
 def translate(line, line_number):
     split_line=line.split()
@@ -15,14 +12,20 @@ def translate(line, line_number):
         cmd, label=split_line
         return lang[cmd].format(label=label)
     elif len(split_line)==3:
-        operation,segment,i=split_line
-        this_or_that=""
-        if segment=="pointer":
-            if i=='0':
-                this_or_that="3"
-            else:
-                this_or_that="4"
-        return (lang[operation][segment].format(filename=os.path.basename(filepath),i=i,this_or_that=this_or_that))
+        if split_line[0]=='push' or split_line[0]=='pop':
+            operation, segment, i = split_line
+            #this or that management
+            this_or_that=""
+            if segment=="pointer":
+                if i=='0':
+                    this_or_that="3"
+                else:
+                    this_or_that="4"
+            #refer to lang and format to return
+            return (lang[operation][segment].format(filename=filename,i=i,this_or_that=this_or_that))
+        else:
+            operation, fName, n = split_line
+            return (lang[operation].format(function_name=fName,line_number=line_number,n=n,nVarsInit="\nA=M\nM=0\n@SP\nM=M+1"*int(n)))
 
 
 with open('language.json','r') as file:
